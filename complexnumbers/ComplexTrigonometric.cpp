@@ -21,10 +21,7 @@ namespace CPPComplex {
 		this->radius = sqrt((real*real) + (imaginary * imaginary));
 	}
 	
-	void ComplexTrigonometric::print() {
-		std::cout << radius << "(" << "cos("<<argument<<")" << " + " << "sin("<<argument<<")" << "i)" << std::endl;
-		std::cout << real << (imaginary>0?"+":"") << imaginary << "i" << std::endl;
-	}
+
 
 	const ComplexTrigonometric ComplexTrigonometric::operator=(Complex complex) {
 		this->real = complex.getReal();
@@ -34,4 +31,21 @@ namespace CPPComplex {
 		return true;
 	}
 
+	void ComplexTrigonometric::scanFrom(std::istream& strm) {
+		strm >> radius;
+		if (strm.peek() == ',') {
+			strm.ignore();
+				strm >> argument;
+		}else {
+			argument = 0;
+		}
+		this->real = radius * cos(argument * PI / 180);
+		this->imaginary = radius * sin(argument * PI / 180);
+	}
+/*
+	void ComplexTrigonometric::print(std::ostream& strm) {
+		Complex::print(strm);
+		
+	}
+	*/
 }

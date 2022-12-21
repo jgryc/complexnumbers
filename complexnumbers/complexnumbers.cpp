@@ -34,7 +34,7 @@ int main()
 
          std::cout << complex3.abs() << " absolute value " << complex3.arg() << " degree";*/
 
-
+    /*
     while (1) {
         std::cout << "Trygonometryczne czy normalne:" << std::endl;
         std::cout << "1. Normalne" << std::endl;
@@ -70,7 +70,7 @@ int main()
             
         }
         
-    }
+    }*/
 
 
          /*Complex complex2(25.f, true);
@@ -144,6 +144,10 @@ int main()
     ComplexTrygonometric comp = complexToTryg;
 	comp.print();
     */
+
+    ComplexTrigonometric complex;
+    std::cin >> complex;
+    std::cout << complex;
 }
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania

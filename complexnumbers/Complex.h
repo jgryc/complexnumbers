@@ -33,9 +33,21 @@ namespace CPPComplex {
 		virtual double getModule();
 		double getReal();
 		double getImaginary();
-		void print();
-
+		virtual void print(std::ostream& strm);
+		virtual void scanFrom(std::istream& strm);
+		
 	};
+
+	inline std::istream& operator >> (std::istream& strm, Complex& complex)
+	{
+		complex.scanFrom(strm);
+		return strm;
+	}
+	
+	inline std::ostream& operator << (std::ostream& strm, Complex& complex) {
+		complex.print(strm);
+		return strm;
+	}
 }
 
 #endif // COMPLEX_HPP

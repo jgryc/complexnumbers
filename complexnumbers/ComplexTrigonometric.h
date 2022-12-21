@@ -14,9 +14,7 @@ namespace CPPComplex {
 		ComplexTrigonometric(double argument=0, double radius=0);
 		ComplexTrigonometric(Complex);
 		const ComplexTrigonometric operator=(const Complex);
-		void print();
-		
-
+		void scanFrom(std::istream&);
 	};
 }
 

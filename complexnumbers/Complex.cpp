@@ -31,32 +31,58 @@ namespace CPPComplex {
 		argument = 0;
 	}
 
-
-
-	const Complex Complex::operator+ (const Complex& complex) const {
-		double r = this->real + complex.real;
-		double i = this->imaginary + complex.imaginary;
-		return Complex(r, i);
+	void Complex::scanFrom(std::istream& strm) {
+		strm >> real;
+		if (strm.peek() == '+') {
+			strm.ignore();
+			strm >> imaginary;
+		}
+		else if (strm.peek() == '-') {
+			strm.ignore();
+			strm >> imaginary;
+			imaginary *= -1;
+		}
+		else {
+			imaginary = 0;
+		}
+		setArgument();
 	}
 
-
-	const Complex Complex::operator- (const Complex& complex) const {
-		double r = this->real - complex.real;
-		double i = this->imaginary - complex.imaginary;
-		return Complex(r, i);
+	void Complex::print(std::ostream& strm) {
+		strm << real << (imaginary > 0 ? "+" : "") << imaginary << "i" << std::endl;
+		std::cout << this->getModule() << "(" << "cos(" << argument << ")" << " + " << "sin(" << argument << ")" << "i)" << std::endl;
 	}
 
-	const Complex Complex::operator* (const Complex& complex) const {
-		double r = this->real * complex.real - this->imaginary * complex.imaginary;
-		double i = this->real * complex.imaginary + complex.real * this->imaginary;
-		return Complex(r, i);
+	const Complex Complex::operator*(const Complex& complex) const {
+		Complex result;
+		result.real = (this->real * complex.real) - (this->imaginary * complex.imaginary);
+		result.imaginary = (this->real * complex.imaginary) + (this->imaginary * complex.real);
+		result.setArgument();
+		return result;
+	}
+	
+	const Complex Complex::operator+(const Complex& complex) const {
+		Complex result;
+		result.real = this->real + complex.real;
+		result.imaginary = this->imaginary + complex.imaginary;
+		result.setArgument();
+		return result;
 	}
 
-	const Complex Complex::operator/ (const Complex& complex) const {
-		double denom = (complex.real * complex.real) + (complex.imaginary * complex.imaginary);
-		double r = ((this->real * complex.real) + (this->imaginary * complex.imaginary)) / denom;
-		double i = ((this->imaginary * complex.real) - (this->real * complex.imaginary)) / denom;
-		return Complex(r, i);
+	const Complex Complex::operator-(const Complex& complex) const {
+		Complex result;
+		result.real = this->real - complex.real;
+		result.imaginary = this->imaginary - complex.imaginary;
+		result.setArgument();
+		return result;
+	}
+
+	const Complex Complex::operator/(const Complex& complex) const {
+		Complex result;
+		result.real = (this->real * complex.real + this->imaginary * complex.imaginary) / (complex.real * complex.real + complex.imaginary * complex.imaginary);
+		result.imaginary = (this->imaginary * complex.real - this->real * complex.imaginary) / (complex.real * complex.real + complex.imaginary * complex.imaginary);
+		result.setArgument();
+		return result;
 	}
 
 	const Complex Complex::operator=(const Complex& complex){
@@ -104,6 +130,7 @@ namespace CPPComplex {
 		return this->imaginary;
 	}
 
+	/*
 	void Complex::print() {
 		if (this->imaginary != 0 && this->real != 0) {
 			std::cout << "Complex number: " << this->real << (imaginary > 0 ? "+" : "") << this->imaginary << "i" << std::endl;
@@ -120,6 +147,7 @@ namespace CPPComplex {
 		}
 		std::cout << this->getArgument() << " deegres " << this->getModule() << " abs" << std::endl;
 	}
+	*/
 }
 
 
